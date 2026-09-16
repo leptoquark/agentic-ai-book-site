@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 370" role="img" aria-labelledby="title desc">
+<title id="title">Mappa rapida di tre scelte architetturali</title><desc id="desc">Compito stabile: workflow. Percorso variabile: agente con strumenti limitati. Azione sensibile: approvazione umana e audit.</desc>
+<rect width="1200" height="370" rx="26" fill="#171b25"/>
+<path d="M400 62V315M800 62V315" stroke="#596274"/>
+<g font-family="Arial,sans-serif"><text x="42" y="47" fill="#ff9b75" font-size="16" font-weight="700" letter-spacing="2">MAPPA RAPIDA / DAL COMPITO ALL'ARCHITETTURA</text>
+<text x="45" y="110" fill="#ff875b" font-size="16" font-weight="700">01 / PASSI NOTI</text><text x="45" y="170" fill="#fff" font-size="36" font-weight="700">Workflow</text><text x="45" y="211" fill="#c5ceda" font-size="18">Sequenza esplicita, testabile,</text><text x="45" y="238" fill="#c5ceda" font-size="18">con uscite e fallimenti definiti.</text>
+<text x="445" y="110" fill="#ff875b" font-size="16" font-weight="700">02 / PERCORSO VARIABILE</text><text x="445" y="170" fill="#fff" font-size="36" font-weight="700">Agente limitato</text><text x="445" y="211" fill="#c5ceda" font-size="18">Scelte dinamiche entro strumenti,</text><text x="445" y="238" fill="#c5ceda" font-size="18">budget e policy espliciti.</text>
+<text x="845" y="110" fill="#ff875b" font-size="16" font-weight="700">03 / EFFETTO SENSIBILE</text><text x="845" y="170" fill="#fff" font-size="36" font-weight="700">Revisione umana</text><text x="845" y="211" fill="#c5ceda" font-size="18">Contesto e prove visibili prima</text><text x="845" y="238" fill="#c5ceda" font-size="18">dell'azione, con audit dopo.</text>
+<text x="45" y="323" fill="#ff875b" font-size="18">→ controllo deterministico</text><text x="445" y="323" fill="#ff875b" font-size="18">→ autonomia circoscritta</text><text x="845" y="323" fill="#ff875b" font-size="18">→ responsabilità esplicita</text></g>
+</svg>

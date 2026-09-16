@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" role="img" aria-labelledby="title desc">
+<title id="title">Scelta tra workflow e agente governato</title><desc id="desc">Una richiesta passa per la classificazione. Il percorso stabile segue un workflow; quello variabile usa un agente con limiti. Entrambi passano per la validazione prima dell'uscita.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10" fill="#ff875b"/></marker><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#1c2434"/><stop offset="1" stop-color="#10131c"/></linearGradient></defs>
+<rect width="1000" height="440" rx="24" fill="url(#bg)"/>
+<g stroke="#ff875b" stroke-width="3" fill="none" marker-end="url(#arrow)"><path d="M225 220H335"/><path d="M515 215 C560 215 550 113 606 113"/><path d="M515 225 C560 225 550 327 606 327"/><path d="M805 113 C865 113 835 217 900 217"/><path d="M805 327 C865 327 835 233 900 233"/></g>
+<g font-family="Arial,sans-serif" text-anchor="middle"><rect x="35" y="170" width="190" height="100" rx="16" fill="#ff6b35"/><text x="130" y="215" font-size="21" font-weight="700" fill="#14171e">Richiesta</text><text x="130" y="242" font-size="15" fill="#14171e">obiettivo e vincoli</text>
+<rect x="335" y="170" width="180" height="100" rx="16" fill="#323d50" stroke="#8190a8"/><text x="425" y="215" font-size="20" font-weight="700" fill="#fff">Classificazione</text><text x="425" y="242" font-size="15" fill="#cad3df">compito e rischio</text>
+<rect x="606" y="58" width="200" height="110" rx="16" fill="#303d50" stroke="#7f95b8"/><text x="706" y="105" font-size="21" font-weight="700" fill="#fff">Workflow</text><text x="706" y="134" font-size="15" fill="#cad3df">passi noti, testabili</text>
+<rect x="606" y="272" width="200" height="110" rx="16" fill="#49352f" stroke="#ff875b"/><text x="706" y="318" font-size="21" font-weight="700" fill="#fff">Agente</text><text x="706" y="347" font-size="15" fill="#ffcfb7">scelte entro limiti</text>
+<rect x="900" y="175" width="75" height="100" rx="16" fill="#ff6b35"/><text x="937" y="215" font-size="15" font-weight="700" fill="#14171e">Check</text><text x="937" y="241" font-size="13" fill="#14171e">output</text></g>
+<text x="35" y="38" fill="#ff9b75" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="2">ARCHITETTURA / LA SCELTA È UN GATE</text>
+</svg>

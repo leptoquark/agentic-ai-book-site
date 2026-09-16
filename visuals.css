@@ -1,0 +1,46 @@
+.visual-lab{background:#0d1018;color:#f2f0eb;padding:clamp(90px,11vw,150px) 0;position:relative;overflow:hidden}
+.visual-lab:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 25%,#ff6b3519,transparent 35%),radial-gradient(#fff1 1px,transparent 1px);background-size:auto,22px 22px;pointer-events:none}
+.visual-lab .container{position:relative}
+.lab-intro{display:flex;justify-content:space-between;align-items:end;gap:55px;margin-bottom:58px}
+.lab-intro .eyebrow{color:#ff8155}
+.lab-intro h2{font-size:clamp(3.7rem,8vw,8.5rem);line-height:.92;font-weight:600;margin:22px 0 0}
+.lab-intro h2 em{color:var(--orange);font-style:normal}
+.lab-intro p{font-size:1.15rem;line-height:1.7;color:#bfc3cb;max-width:400px;margin:0 0 5px}
+.lab-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.lab-tab{appearance:none;border:1px solid #555b69;background:#202531;color:#dce0e7;border-radius:100px;padding:15px 21px;font:600 .95rem 'DM Sans',sans-serif;cursor:pointer;transition:background .2s,transform .2s,border-color .2s}
+.lab-tab span{font-size:.72rem;color:#ff875b;margin-right:12px}
+.lab-tab:hover{transform:translateY(-3px);border-color:#ff875b}
+.lab-tab.active{background:var(--orange);border-color:var(--orange);color:#111318}
+.lab-tab.active span{color:#292019}
+.lab-tab:focus-visible,.next-node:focus-visible,.diagram-node:focus-visible{outline:3px solid white;outline-offset:4px}
+.lab-panel{border:1px solid #464c58;background:linear-gradient(145deg,#171c27,#10141d);box-shadow:0 30px 70px #0004;overflow:hidden}
+.diagram-top{padding:38px 44px 14px;display:flex;justify-content:space-between;align-items:end;gap:30px}
+.diagram-top .eyebrow{color:#ff875b}
+.diagram-top h3{font:600 clamp(1.7rem,3vw,3rem)/1.1 'Space Grotesk',sans-serif;letter-spacing:-.05em;margin:12px 0 0}
+.diagram-hint{font-size:.8rem;color:#aeb5c2}
+.diagram-scroll{overflow-x:auto;scrollbar-color:#ff6b35 #242b37}
+.diagram-scroll svg{display:block;width:100%;min-width:720px;height:auto}
+.diagram-connection{fill:none;stroke:#6c778b;stroke-width:2;stroke-dasharray:7 9;animation:flow 18s linear infinite}
+.diagram-connection.active{stroke:#ff875b;stroke-width:3}
+.diagram-node{cursor:pointer}
+.diagram-node .node-ring{fill:#252d3c;stroke:#748096;stroke-width:2;transition:fill .3s,stroke .3s,filter .3s}
+.diagram-node:hover .node-ring,.diagram-node.active .node-ring{fill:#ff6b35;stroke:#ffbe9d;filter:drop-shadow(0 0 19px #ff6b3588)}
+.diagram-node .node-core{fill:#ff875b}
+.diagram-node:hover .node-core,.diagram-node.active .node-core{fill:#13161e}
+.diagram-node text{fill:#e8edf2;font:600 17px 'Space Grotesk',sans-serif;text-anchor:middle;pointer-events:none}
+.diagram-node .node-number{fill:#ff875b;font:700 12px 'DM Sans',sans-serif;letter-spacing:.12em}
+.diagram-node.active .node-number,.diagram-node:hover .node-number{fill:#ffccaf}
+.node-detail{min-height:160px;border-top:1px solid #464c58;background:#202632;padding:28px 44px;display:grid;grid-template-columns:100px 1fr auto;align-items:start;gap:22px}
+.detail-index{color:#ff875b;font-size:.75rem;font-weight:700;letter-spacing:.15em;padding-top:5px}
+.node-detail h4{font:600 1.5rem 'Space Grotesk',sans-serif;letter-spacing:-.04em;margin:0 0 9px}
+.node-detail p{color:#bec5cf;line-height:1.65;margin:0;max-width:700px}
+.next-node{border:0;border-bottom:1px solid #ff875b;background:none;color:#ff875b;font:700 .85rem 'DM Sans',sans-serif;cursor:pointer;padding:5px 0;white-space:nowrap}
+.next-node:hover{color:white}
+.lab-bottom{display:flex;justify-content:space-between;align-items:center;gap:30px;padding-top:30px}
+.lab-bottom p{color:#b8bec9;line-height:1.6;margin:0;max-width:730px}
+.lab-bottom a{color:#ff875b;text-decoration:none;font-weight:700;white-space:nowrap;border-bottom:1px solid #ff875b;padding-bottom:5px}
+.lab-bottom a:hover{color:white}
+@keyframes flow{to{stroke-dashoffset:-320}}
+@media(max-width:900px){.lab-intro{display:block}.lab-intro p{margin-top:28px}.node-detail{grid-template-columns:1fr;gap:10px}.next-node{justify-self:start;margin-top:10px}.lab-bottom{align-items:start;flex-direction:column}}
+@media(max-width:600px){.visual-lab{padding:80px 0}.lab-intro h2{font-size:clamp(3.5rem,14vw,5.5rem)}.lab-tab{padding:12px 16px;font-size:.87rem}.diagram-top{padding:27px 24px 14px;display:block}.diagram-hint{display:block;margin-top:12px}.node-detail{padding:24px}.lab-bottom{padding-top:25px}}
+@media(prefers-reduced-motion:reduce){.diagram-connection{animation:none}}

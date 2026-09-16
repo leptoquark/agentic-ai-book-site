@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101014"><meta name="description" content="Una traccia utile deve raccontare più del nome dello strumento invocato. Deve permettere di ricostruire contesto, autorizzazioni ed effetti."><title>Il giorno in cui qualcosa va storto — Blog di Claudio Biancalana</title><link rel="stylesheet" href="/blog/blog.css"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23101014'/%3E%3Cpath d='M14 15h19c11 0 18 7 18 17S44 49 33 49H14V15zm11 10v14h8c5 0 7-3 7-7s-2-7-7-7h-8z' fill='%23ff6b35'/%3E%3C/svg%3E"></head>
+<body><header class="dark"><div class="wrap"><nav class="nav" aria-label="Navigazione principale"><a class="brand" href="/">Claudio<b>.</b>Biancalana</a><div class="nav-links"><a href="/">Home</a><a href="/#libro">Il libro</a><a href="/blog/" class="current">Blog</a></div></nav><div class="article-hero"><div class="eyebrow">Governance / Il blog</div><h1>Il giorno in cui qualcosa va storto</h1><p class="deck">Una traccia utile deve raccontare più del nome dello strumento invocato. Deve permettere di ricostruire contesto, autorizzazioni ed effetti.</p><div class="article-meta"><span>Claudio Biancalana</span><span>16 settembre 2026</span></div></div></div></header>
+<main><div class="wrap article-layout"><aside class="article-side">Appunti dal libro<a href="/blog/">← Tutti gli articoli</a></aside><article class="article-body"><p class="lead">Se un sistema invoca un tool e modifica uno stato esterno, il log “tool chiamato” non basta. Occorre sapere quale azione è stata proposta, quali argomenti sono stati validati, chi era autorizzato e quale effetto è stato prodotto.</p><figure class="tech-figure"><img src="/blog/assets/audit-trail.svg" alt="Modello, gate applicativo, eventuale persona, strumento e audit trail per tutte le fasi" loading="lazy"><figcaption>Il modello propone; il software applica policy e valida; una persona approva le azioni sensibili; la traccia conserva i passaggi necessari a ricostruire l’esito.</figcaption></figure><h2>Separare proposta e autorizzazione</h2><p>Nel codice, <code>authorize</code>, <code>validate</code> e <code>tool</code> sono dipendenze distinte. L'LLM può contribuire a proporre un'azione, ma non dovrebbe sostituire il controllo applicativo. L'evento registrato usa un hash degli argomenti, evitando di mettere automaticamente nel log il loro contenuto.</p><div class="code-label"><span>03 / Gate e audit event</span><span>Python 3 · libreria standard</span></div><pre><code class="language-python">from hashlib import sha256
+import json
+
+def audit_event(actor, action, allowed, arguments, outcome):
+    canonical = json.dumps(arguments, sort_keys=True,
+                           separators=(&quot;,&quot;, &quot;:&quot;)).encode()
+    return {&quot;actor&quot;: actor, &quot;action&quot;: action, &quot;allowed&quot;: allowed,
+            &quot;arguments_sha256&quot;: sha256(canonical).hexdigest(),
+            &quot;outcome&quot;: outcome}
+
+def execute(user, action, arguments, authorize, validate, tool, sink):
+    allowed = authorize(user, action)
+    if not allowed:
+        sink(audit_event(user, action, False, arguments, &quot;denied&quot;))
+        raise PermissionError(action)
+    try:
+        clean = validate(arguments)
+    except Exception as exc:
+        sink(audit_event(user, action, True, arguments,
+                         &quot;validation:&quot; + type(exc).__name__))
+        raise
+    try:
+        result = tool(clean)
+    except Exception as exc:
+        sink(audit_event(user, action, True, clean, type(exc).__name__))
+        raise
+    sink(audit_event(user, action, True, clean, &quot;ok&quot;))
+    return result</code></pre><p class="code-note">Esempio illustrativo. Un hash non rende anonimi gli argomenti e non sostituisce un archivio sicuro. In produzione servono ID di correlazione, persistenza affidabile, gestione dei dati personali, idempotenza e una policy per i casi in cui il log fallisce.</p><h2>La traccia minima da progettare</h2><table class="tech-table"><thead><tr><th>Campo</th><th>Perché serve</th><th>Attenzione</th></tr></thead><tbody><tr><td>Identità e ruolo</td><td>Attribuire la richiesta e verificare i privilegi</td><td>Minimizzare i dati conservati</td></tr><tr><td>Versioni di fonti e policy</td><td>Riprodurre il contesto della decisione</td><td>Conservare riferimenti immutabili</td></tr><tr><td>Argomenti validati</td><td>Capire l'effetto richiesto al tool</td><td>Proteggere dati e segreti</td></tr><tr><td>Esito e approvazione</td><td>Ricostruire l'azione e chi l'ha autorizzata</td><td>Distinguere proposta da esecuzione</td></tr></tbody></table><p>Per le scritture aggiungerei una chiave di idempotenza e una strategia per i timeout: non sempre un errore di rete significa che l'azione non sia stata eseguita. Anche il percorso di recupero va rappresentato nella traccia.</p><div class="technical-summary" aria-label="Sintesi tecnica"><div><strong>Proposta</strong><span>Il modello non concede privilegi.</span></div><div><strong>Esecuzione</strong><span>Il software valida prima dell’effetto.</span></div><div><strong>Ricostruzione</strong><span>Eventi correlati a fonti, policy, approvazioni ed esiti.</span></div></div><p>Nel libro dedico spazio a guardrail, osservabilità, test e intervento umano informato. Sono requisiti da progettare insieme ai tool: aggiungerli alla fine significa spesso scoprire troppo tardi che la decisione non è più ricostruibile.</p><div class="article-end"><p>Se questi temi ti interessano, li approfondisco in <strong>Architetture Agentiche</strong>, con pattern, casi guida, scelte di progetto, metriche e modalità di guasto.</p><a class="button" href="https://www.amazon.it/dp/B0HCDBLKKM" target="_blank" rel="noopener noreferrer">Scopri il libro su Amazon ↗</a></div></article></div><aside class="next-read"><div class="wrap"><span>Continua a leggere</span><a href="/blog/quando-serve-un-agente.html">Serve davvero un agente? ↗</a></div></aside></main>
+<footer class="footer"><div class="wrap"><span><strong>Claudio Biancalana.</strong> Idee da mettere alla prova.</span><a href="/blog/">Torna al blog ↑</a></div></footer></body></html>
