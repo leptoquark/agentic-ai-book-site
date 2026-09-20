@@ -18,7 +18,7 @@ La nota è HTML statico, visibile anche senza JavaScript, nel footer della homep
 
 ## Post LinkedIn
 
-La sezione `#linkedin` della homepage contiene due post selezionati: presentazione del libro e guida illustrata a 21 pattern. Non è un feed automatico.
+La sezione `#linkedin` della homepage contiene quattro post selezionati: presentazione del libro, guida illustrata a 21 pattern, scelta del livello di autonomia e cinque verità controintuitive sulle architetture agentiche. Non è un feed automatico.
 
 Gli indirizzi embed sono quelli mostrati da LinkedIn in “Embed this post”. `linkedin-posts.js` crea ciascun iframe soltanto dopo il clic del visitatore; “Chiudi anteprima” rimuove il frame. Nessun cookie di consenso viene salvato. I link diretti restano disponibili senza JavaScript o se LinkedIn impedisce il caricamento. La disponibilità dipende dalla visibilità del post e dalle impostazioni LinkedIn del suo autore.
 
@@ -31,4 +31,4 @@ node --check linkedin-posts.js
 python tests/check_site.py
 ```
 
-Verificare inoltre l'anteprima desktop/mobile, il caricamento di entrambi i frame e il ritorno al pulsante dopo la chiusura.
+Verificare inoltre l'anteprima desktop/mobile, il caricamento dei quattro frame e il ritorno al pulsante dopo la chiusura.

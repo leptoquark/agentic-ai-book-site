@@ -52,10 +52,12 @@ class SiteChecks(unittest.TestCase):
         page = Page(ROOT / 'index.html')
         self.assertFalse(any(tag == 'iframe' for tag, _ in page.tags))
         buttons = [a for tag, a in page.tags if tag == 'button' and 'data-embed-url' in a]
-        self.assertEqual(len(buttons), 2)
+        self.assertEqual(len(buttons), 4)
         self.assertEqual({a['data-embed-url'] for a in buttons}, {
             'https://www.linkedin.com/embed/feed/update/urn:li:share:7502415955562622976?collapsed=1',
             'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7506651977590657024?collapsed=1',
+            'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7503817163301122048?collapsed=1',
+            'https://www.linkedin.com/embed/feed/update/urn:li:share:7504076470827352064?collapsed=1',
         })
         for button in buttons:
             self.assertTrue(button['data-embed-title'])
